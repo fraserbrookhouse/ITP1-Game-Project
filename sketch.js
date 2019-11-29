@@ -75,7 +75,7 @@ function draw()
 	vertex(235, 432);
 
 	endShape();
-
+	
 
 	noStroke();
 	fill(255);
