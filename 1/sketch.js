@@ -84,7 +84,7 @@ function draw()
 	//5. a collectable token - eg. a jewel, fruit, coins
 	//... add your code here
 	//grapes
-	
+
 	fill(70, 0, 130);
 	ellipse(350, 410, 10, 10);
 	ellipse(360, 410, 10, 10);
