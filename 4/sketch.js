@@ -38,26 +38,39 @@ function setup()
 	clouds = [
 		{pos_x: 100, pos_y: 200},
 		{pos_x: 600, pos_y: 100},
-		{pos_x: 800, pos_y: 200}
+		{pos_x: 800, pos_y: 200},
+		{pos_x: 1100, pos_y: 200},
+		{pos_x: 1600, pos_y: 100},
+		{pos_x: 1800, pos_y: 200}
 	]
 	
 	canyons = [
-		{pos_x: 150, width: 150},
-		{pos_x: 400, width: 180},
-		{pos_x: 1050, width: 120}
+		{pos_x: 160, width: 150},
+		{pos_x: 800, width: 180},
+		{pos_x: 1300, width: 120},
+		{pos_x: 1600, width: 150},
+		{pos_x: 1800, width: 180},
+		{pos_x: 2300, width: 120}
 	]
 
 	mountains = [
 		{pos_x: 50, size: 60},
 		{pos_x: 500, size: 75},
-		{pos_x: 1100, size: 65}
+		{pos_x: 1100, size: 65},
+		{pos_x: 1050, size: 60},
+		{pos_x: 1500, size: 75},
+		{pos_x: 2100, size: 65}
 	]
 
 	collectables = [
 		{pos_x: 50, pos_y: floorPos_y, size: 50},
 		{pos_x: 450, pos_y: floorPos_y - 75, size: 70},
-		{pos_x: 700, pos_y: floorPos_y, size: 50}
-
+		{pos_x: 700, pos_y: floorPos_y, size: 50},
+		{pos_x: 1400, pos_y: floorPos_y - 75, size: 70},
+		{pos_x: 1050, pos_y: floorPos_y, size: 50},
+		{pos_x: 1450, pos_y: floorPos_y - 75, size: 70},
+		{pos_x: 2000, pos_y: floorPos_y, size: 50},
+		{pos_x: 2400, pos_y: floorPos_y - 75, size: 70},
 	]
 }
 
