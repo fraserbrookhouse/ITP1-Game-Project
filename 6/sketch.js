@@ -28,6 +28,30 @@ var trees_x;
 var canyons;
 var collectables;
 
+var backgroundMusic;
+var jumpSound;
+var dieSound;
+var winSound;
+
+function preload() {
+  // load used sound formats
+  soundFormats('mp3', 'wav');
+
+  // load sounds
+  backgroundMusic = loadSound('assets/background.mp3');
+  backgroundMusic.setVolume(0.1);
+
+  jumpSound = loadSound('assets/jump.wav');
+  jumpSound.setVolume(0.1);
+
+  dieSound = loadSound('assets/die.mp3');
+  dieSound.setVolume(0.1);
+
+  winSound - loadSound('assets/win.wav');
+  winSound.setVolume(0.1);
+}
+
+
 function startGame() {
 // character starting position
   gameChar_x = width/2;
@@ -44,7 +68,7 @@ function startGame() {
   game_score = 0;
 
   // init flagpole
-  flagpole = {isReached: false, x_pos: 2000};
+  flagpole = {isReached: false, x_pos: 3000};
 
   // Boolean variables to control the movement of the game character.
   isLeft = false;
@@ -158,15 +182,24 @@ function draw() {
     textAlign(CENTER);
     text('GAME OVER', width/2, height/2);
     text('Press space to continue...', width/2, height/2 + 50);
+    if (keyCode == 32) {
+      lives = 3;
+    }
   }
 
   if (flagpole.isReached == true) {
+    isLeft = false;
+    isRight = false
     fill(255);
     stroke(15);
     textSize(50);
     textAlign(CENTER);
     text('LEVEL COMPLETE!', width/2, height/2);
     text('Press space to continue...', width/2, height/2 + 50);
+    if (keyCode == 32) {
+      lives = 3;
+      startGame();
+    }
   }
 
   // draw game score
@@ -185,18 +218,21 @@ function draw() {
   // Logic to make the game character move or the background scroll.
 
   if (isLeft) {
-    if (gameChar_x > width * 0.2) {
-      gameChar_x -= 5;
-    } else {
-      scrollPos += 5;
+    if (isPlummeting == false) {
+      if (gameChar_x > width * 0.2) {
+        gameChar_x -= 5;
+      } else {
+        scrollPos += 5;
+      }
     }
   }
-
   if (isRight) {
-    if (gameChar_x < width * 0.8) {
-      gameChar_x += 5;
-    } else {
-      scrollPos -= 5; // negative for moving against the background
+    if (isPlummeting == false) {
+      if (gameChar_x < width * 0.8) {
+        gameChar_x += 5;
+      } else {
+        scrollPos -= 5; // negative for moving against the background
+      }
     }
   }
 
@@ -235,6 +271,7 @@ function keyPressed() {
       console.log('spacebarispressed');
       if (gameChar_y == floorPos_y) {
         gameChar_y -= 200;
+        jumpSound.play();
       }
     }
   }
@@ -576,7 +613,7 @@ function checkCanyon(t_canyon) {
     gameChar_world_x < t_canyon.pos_x + t_canyon.width &&
     gameChar_y > floorPos_y -1) {
     isPlummeting = true;
-    gameChar_y += 5;
+    gameChar_y += 20;
   }
 }
 
@@ -646,6 +683,7 @@ function checkFlagpole() {
   var d = gameChar_world_x - flagpole.x_pos;
   if (d > 0) {
     flagpole.isReached = true;
+    winSound.play();
   } else {
     flagpole.isReached = false;
   }
