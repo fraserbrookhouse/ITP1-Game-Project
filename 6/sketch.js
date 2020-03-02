@@ -42,7 +42,7 @@ function preload() {
   backgroundMusic.setVolume(0.1);
 
   jumpSound = loadSound('assets/jump.wav');
-  jumpSound.setVolume(0.1);
+  jumpSound.setVolume(10);
 
   dieSound = loadSound('assets/die.mp3');
   dieSound.setVolume(0.1);
@@ -175,7 +175,7 @@ function draw() {
   pop();
   // Draw game character.
 
-  if (lives < 0) {
+  if (lives <= 0) {
     fill(255);
     stroke(15);
     textSize(50);
@@ -189,7 +189,7 @@ function draw() {
 
   if (flagpole.isReached == true) {
     isLeft = false;
-    isRight = false
+    isRight = false;
     fill(255);
     stroke(15);
     textSize(50);
@@ -660,8 +660,11 @@ function renderFlagpole() {
 
 function checkPlayerDie() {
   if (gameChar_y > 600) {
-    lives -= 1;
     if (lives > 0) {
+      lives -= 1;
+      dieSound.playMode('sustain');
+      dieSound.isLooping(false);
+      dieSound.play();
       startGame();
     }
   }
